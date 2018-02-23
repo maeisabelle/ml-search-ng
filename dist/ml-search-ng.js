@@ -2449,7 +2449,7 @@ function MLSearchController($scope, $location, mlSearch) {
      * @param {Object} [adhoc] - structured query || combined query || partial search options object
      * @return {Promise} a promise resolved with search results
      */
-    search: function search(adhoc, addtlParams) {
+    search: function search(adhoc) {
       var self = this;
       var params = {
         start: this.start,
@@ -2467,16 +2467,14 @@ function MLSearchController($scope, $location, mlSearch) {
           combined.search.options = adhoc.options;
         } else if ( adhoc.query ) {
           combined.search.query = adhoc.query;
+        } else if (adhoc.params) {
+          _.merge(params, adhoc.params);
         } else {
           combined.search.options = adhoc;
         }
       } else {
         params.structuredQuery = this.getQuery();
         params.q = this.getText();
-      }
-
-      if (addtlParams) {
-        _.merge(params, addtlParams);
       }
 
       return mlRest.search(params, combined)

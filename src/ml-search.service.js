@@ -1290,8 +1290,8 @@
         params.structuredQuery = this.getQuery();
         params.q = this.getText();
       }
-      
-      if(addtlParams) {
+
+      if (addtlParams) {
         _.merge(params, addtlParams);
       }
 

@@ -43,7 +43,7 @@ describe('ml-chiclets', function () {
     });
 
     it('should toggle the top button - first NOT negated facet', function() {
-      elem.find('.chiclets > div > .btn > .glyphicon').eq(0).click();
+      elem.find('.chiclets > div > .btn > .fa').eq(0).click();
       expect($scope.toggleFacet).toHaveBeenCalled();
 
       var args = $scope.toggleFacet.calls.mostRecent().args;
@@ -52,7 +52,7 @@ describe('ml-chiclets', function () {
     });
 
     it('should toggle the second button - negated facet', function() {
-      elem.find('.chiclets > div > .btn > .glyphicon').eq(1).click();
+      elem.find('.chiclets > div > .btn > .fa').eq(1).click();
       expect($scope.toggleFacet).toHaveBeenCalled();
 
       var args = $scope.toggleFacet.calls.mostRecent().args;

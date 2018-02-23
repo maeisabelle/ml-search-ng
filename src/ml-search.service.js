@@ -1265,7 +1265,7 @@
      * @param {Object} [adhoc] - structured query || combined query || partial search options object
      * @return {Promise} a promise resolved with search results
      */
-    search: function search(adhoc) {
+    search: function search(adhoc, addtlParams) {
       var self = this;
       var params = {
         start: this.start,
@@ -1289,6 +1289,10 @@
       } else {
         params.structuredQuery = this.getQuery();
         params.q = this.getText();
+      }
+      
+      if(addtlParams) {
+        _.merge(params, addtlParams);
       }
 
       return mlRest.search(params, combined)

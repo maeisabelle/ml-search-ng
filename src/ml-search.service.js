@@ -71,6 +71,7 @@
     this.searchTransform = null;
     this.qtext = null;
     this.start = 1;
+    this.database = null;
 
     // TODO: validate options
     this.options = _.merge( _.cloneDeep(this.defaults), options );
@@ -333,6 +334,32 @@
         this.qtext = text;
       } else {
         this.qtext = null;
+      }
+      return this;
+    },
+
+    /**
+     * Gets the database
+     * @method MLSearchContext#getDatabase
+     *
+     * @return {String} database
+     */
+    getDatabase: function getDatabase() {
+      return this.database;
+    },
+
+    /**
+     * Sets the database
+     * @method MLSearchContext#setDatabase
+     *
+     * @param {String} text - search phrase
+     * @return {MLSearchContext} `this`
+     */
+    setDatabase: function setDatabase(database) {
+      if (database) {
+        this.database = database;
+      } else {
+        this.database = null;
       }
       return this;
     },
@@ -1283,14 +1310,17 @@
           combined.search.options = adhoc.options;
         } else if ( adhoc.query ) {
           combined.search.query = adhoc.query;
-        } else if (adhoc.params) {
-          _.merge(params, adhoc.params);
         } else {
           combined.search.options = adhoc;
         }
       } else {
         params.structuredQuery = this.getQuery();
         params.q = this.getText();
+      }
+
+      var database = this.getDatabase();
+      if (database) {
+        params.database = database;
       }
 
       return mlRest.search(params, combined)

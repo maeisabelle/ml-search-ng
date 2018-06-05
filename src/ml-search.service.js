@@ -1285,9 +1285,6 @@
           combined.search.query = adhoc.query;
         } else if (adhoc.params) {
           _.merge(params, adhoc.params);
-          if (!params.structuredQuery) {
-            params.structuredQuery = this.getQuery();
-          }
         } else {
           combined.search.options = adhoc;
         }
